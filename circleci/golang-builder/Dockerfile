@@ -11,7 +11,7 @@ RUN echo "deb http://packages.cloud.google.com/apt cloud-sdk-jessie main" | sudo
     sudo rm -rf /var/lib/apt/lists/*
 
 # install ghr (GitHub release file uploader)
-ENV GHR_VERSION 0.10.0
+ENV GHR_VERSION 0.10.2
 RUN sudo wget -q -O tmp.tgz https://github.com/tcnksm/ghr/releases/download/v${GHR_VERSION}/ghr_v${GHR_VERSION}_linux_amd64.tar.gz && \
     sudo tar -xzf tmp.tgz --strip-components=1 -C /usr/local/bin ghr_v${GHR_VERSION}_linux_amd64/ghr && \
     sudo rm -rf tmp.tgz

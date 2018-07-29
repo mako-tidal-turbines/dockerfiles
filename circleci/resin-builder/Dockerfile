@@ -8,8 +8,20 @@ RUN echo "deb http://packages.cloud.google.com/apt cloud-sdk-jessie main" | sudo
     sudo rm -rf /var/lib/apt/lists/*
 
 # install resin-cli
-ENV RESINCLI_VERSION 7.6.1
+ENV RESINCLI_VERSION 7.8.2
 RUN sudo wget -q -O tmp.zip https://github.com/resin-io/resin-cli/releases/download/v${RESINCLI_VERSION}/resin-cli-v${RESINCLI_VERSION}-linux-x64.zip && \
     sudo unzip tmp.zip -d /usr/local/bin && \
     sudo rm -rf tmp.zip
 ENV PATH="/usr/local/bin/resin-cli:${PATH}"
+
+# install dart 2 and webdev tool (current dev channel version)
+RUN sudo apt-get update -y -qq && \
+    sudo apt-get install apt-transport-https -y && \
+    sudo sh -c 'curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -' && \
+    sudo sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_unstable.list > /etc/apt/sources.list.d/dart_unstable.list' && \
+    sudo apt-get update -y -qq && \
+    sudo apt-get install dart && \
+    sudo rm -rf /var/lib/apt/lists/* && \
+    dart --version
+ENV PATH="/usr/lib/dart/bin:${PATH}:/home/circleci/.pub-cache/bin"
+RUN pub global activate webdev
