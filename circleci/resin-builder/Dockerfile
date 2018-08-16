@@ -8,7 +8,7 @@ RUN echo "deb http://packages.cloud.google.com/apt cloud-sdk-jessie main" | sudo
     sudo rm -rf /var/lib/apt/lists/*
 
 # install resin-cli
-ENV RESINCLI_VERSION 7.9.0
+ENV RESINCLI_VERSION 7.9.2
 RUN sudo wget -q -O tmp.zip https://github.com/resin-io/resin-cli/releases/download/v${RESINCLI_VERSION}/resin-cli-v${RESINCLI_VERSION}-linux-x64.zip && \
     sudo unzip tmp.zip -d /usr/local/bin && \
     sudo rm -rf tmp.zip
